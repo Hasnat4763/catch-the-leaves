@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7d4g5thmbwjj"
-path="res://.godot/imported/godotwaka2.png-5e17ae7e10782199d93bd1e691810a6d.ctex"
+uid="uid://bumhxnp8752j0"
+path="res://.godot/imported/net.png-0f908dce8876ae0f5e06e7444011507e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Godot_Super-Wakatime-14d064a9b3c5c607725295411c9461e406006324/images/godotwaka2.png"
-dest_files=["res://.godot/imported/godotwaka2.png-5e17ae7e10782199d93bd1e691810a6d.ctex"]
+source_file="res://sprites/net.png"
+dest_files=["res://.godot/imported/net.png-0f908dce8876ae0f5e06e7444011507e.ctex"]
 
 [params]
 
