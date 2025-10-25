@@ -19,7 +19,6 @@ script = ExtResource("1_740th")
 
 [node name="startscreen" parent="." instance=ExtResource("2_740th")]
 z_index = 1
-position = Vector2(-2, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -45,9 +44,9 @@ shape = SubResource("RectangleShape2D_80nbo")
 position = Vector2(573, 286)
 shape = SubResource("SegmentShape2D_740th")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="overlay" type="CanvasLayer" parent="."]
 
-[node name="score" type="Label" parent="CanvasLayer"]
+[node name="score" type="Label" parent="overlay"]
 offset_left = 9.0
 offset_top = 7.0
 offset_right = 73.0

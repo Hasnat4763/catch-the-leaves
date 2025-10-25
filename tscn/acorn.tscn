@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ug3tg8j5dink"]
+
+[ext_resource type="Script" uid="uid://ccxmudnqakfwe" path="res://scripts/acorn.gd" id="1_0uar0"]
+[ext_resource type="Texture2D" uid="uid://bnk01o46ths1m" path="res://sprites/acorn.png" id="1_7tok2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0uar0"]
+radius = 14.035668
+
+[node name="acorn" type="Area2D"]
+script = ExtResource("1_0uar0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7tok2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0uar0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
