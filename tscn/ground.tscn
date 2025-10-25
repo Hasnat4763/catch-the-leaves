@@ -5,4 +5,4 @@
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 0, 648, 1152, 648, 1152, 0, 1169, 663, -8, 655)
+polygon = PackedVector2Array(0, 0, 0, 648, 1152, 649, 1152, 0, 1170, 670, -8, 655)

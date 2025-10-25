@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dq3yumwc0h5ns"]
+
+[ext_resource type="Script" uid="uid://vtmf7ro7tqv3" path="res://scripts/game.gd" id="1_740th"]
+[ext_resource type="Script" uid="uid://l5njnsgt52di" path="res://scripts/catchingnet.gd" id="1_ivtoj"]
+[ext_resource type="Texture2D" uid="uid://bumhxnp8752j0" path="res://sprites/net.png" id="1_juix7"]
+[ext_resource type="PackedScene" uid="uid://cs857bxlexofu" path="res://tscn/leaves_spawner.tscn" id="4_740th"]
+[ext_resource type="PackedScene" uid="uid://buymcdjsnx3le" path="res://tscn/ground.tscn" id="4_tp0hw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
+size = Vector2(73.25, 9.5)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_740th")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="catchingnet" type="CharacterBody2D" parent="."]
+script = ExtResource("1_ivtoj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet"]
+position = Vector2(494.375, 335)
+shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="catchingnet"]
+position = Vector2(496, 341.5)
+scale = Vector2(2.9375, 2.46875)
+texture = ExtResource("1_juix7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="CanvasLayer"]
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 73.0
+offset_bottom = 30.0
+
+[node name="ground" parent="." instance=ExtResource("4_tp0hw")]
+disable_mode = 2
+
+[node name="leaves_spawner" parent="." instance=ExtResource("4_740th")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

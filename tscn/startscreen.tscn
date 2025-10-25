@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm1ojyciwpr5s"]
+
+[ext_resource type="Script" uid="uid://la2j731f8iok" path="res://scripts/start.gd" id="1_31g0q"]
+
+[node name="startscreen" type="Node2D"]
+
+[node name="topbanner" type="Label" parent="."]
+offset_right = 1150.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 64
+text = "Catch The Leaf"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="start" type="Button" parent="."]
+z_index = 1
+offset_left = 420.0
+offset_top = 227.0
+offset_right = 742.0
+offset_bottom = 309.0
+theme_override_font_sizes/font_size = 32
+text = "Start"
+script = ExtResource("1_31g0q")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="start" to="start" method="_on_pressed"]

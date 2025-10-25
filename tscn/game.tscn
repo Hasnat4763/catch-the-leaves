@@ -1,32 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://dq3yumwc0h5ns"]
+[gd_scene load_steps=9 format=3 uid="uid://dq3yumwc0h5ns"]
 
-[ext_resource type="PackedScene" uid="uid://c7am37n2ww6xk" path="res://tscn/leafs.tscn" id="1_407eg"]
+[ext_resource type="Script" uid="uid://vtmf7ro7tqv3" path="res://scripts/game.gd" id="1_740th"]
 [ext_resource type="Script" uid="uid://l5njnsgt52di" path="res://scripts/catchingnet.gd" id="1_ivtoj"]
 [ext_resource type="Texture2D" uid="uid://bumhxnp8752j0" path="res://sprites/net.png" id="1_juix7"]
+[ext_resource type="PackedScene" uid="uid://bm1ojyciwpr5s" path="res://tscn/startscreen.tscn" id="2_740th"]
 [ext_resource type="PackedScene" uid="uid://buymcdjsnx3le" path="res://tscn/ground.tscn" id="4_tp0hw"]
+[ext_resource type="AudioStream" uid="uid://b1wp8gsoky1v4" path="res://sounds/scored.ogg" id="6_rpnrw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(73.25, 9.5)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_740th"]
+a = Vector2(23, 13)
+b = Vector2(-22, 13)
+
 [node name="game" type="Node2D"]
+script = ExtResource("1_740th")
+
+[node name="startscreen" parent="." instance=ExtResource("2_740th")]
+z_index = 1
+position = Vector2(-2, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="catchingnet" type="CharacterBody2D" parent="."]
 script = ExtResource("1_ivtoj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet"]
-position = Vector2(494.375, 335)
-shape = SubResource("RectangleShape2D_80nbo")
-
 [node name="Sprite2D" type="Sprite2D" parent="catchingnet"]
-position = Vector2(496, 341.5)
+position = Vector2(575, 269.5)
 scale = Vector2(2.9375, 2.46875)
 texture = ExtResource("1_juix7")
 
+[node name="Area2D" type="Area2D" parent="catchingnet"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet/Area2D"]
+position = Vector2(573.375, 263)
+shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet"]
+position = Vector2(573.375, 263)
+shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="catchingnet"]
+position = Vector2(573, 286)
+shape = SubResource("SegmentShape2D_740th")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="leafs" parent="." instance=ExtResource("1_407eg")]
+[node name="score" type="Label" parent="CanvasLayer"]
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 73.0
+offset_bottom = 30.0
 
 [node name="ground" parent="." instance=ExtResource("4_tp0hw")]
 disable_mode = 2
+
+[node name="scored" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_rpnrw")
