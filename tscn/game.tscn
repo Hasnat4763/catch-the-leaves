@@ -29,26 +29,33 @@ texture = ExtResource("3_qol31")
 [node name="overlay" type="CanvasLayer" parent="."]
 
 [node name="score" type="Label" parent="overlay"]
-offset_left = 28.0
-offset_top = 27.0
-offset_right = 92.0
-offset_bottom = 50.0
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 96.0
+offset_bottom = 44.0
 text = "Score"
 metadata/_edit_use_anchors_ = true
 
 [node name="time_left" type="Label" parent="overlay"]
-offset_left = 27.0
-offset_top = 106.0
-offset_right = 132.0
-offset_bottom = 130.0
+offset_left = 23.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 71.0
 text = "Time Left"
 
 [node name="target" type="Label" parent="overlay"]
-offset_left = 26.0
-offset_top = 65.0
-offset_right = 124.0
-offset_bottom = 94.0
+offset_left = 23.0
+offset_top = 75.0
+offset_right = 96.0
+offset_bottom = 98.0
 text = "Target"
+
+[node name="sticks" type="Label" parent="overlay"]
+offset_left = 23.0
+offset_top = 102.0
+offset_right = 96.0
+offset_bottom = 125.0
+text = "sticks"
 
 [node name="ground" parent="." instance=ExtResource("4_tp0hw")]
 disable_mode = 2
