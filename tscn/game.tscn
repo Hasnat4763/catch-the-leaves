@@ -1,18 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://dq3yumwc0h5ns"]
 
 [ext_resource type="Script" uid="uid://vtmf7ro7tqv3" path="res://scripts/game.gd" id="1_740th"]
-[ext_resource type="Script" uid="uid://l5njnsgt52di" path="res://scripts/catchingnet.gd" id="1_ivtoj"]
-[ext_resource type="Texture2D" uid="uid://bumhxnp8752j0" path="res://sprites/net.png" id="1_juix7"]
 [ext_resource type="PackedScene" uid="uid://bm1ojyciwpr5s" path="res://tscn/startscreen.tscn" id="2_740th"]
+[ext_resource type="Texture2D" uid="uid://dosxvmrr2iaiy" path="res://sprites/ORS97Z0.jpg" id="3_qol31"]
+[ext_resource type="PackedScene" uid="uid://gct20msn75tr" path="res://tscn/catchingnet.tscn" id="4_qol31"]
 [ext_resource type="PackedScene" uid="uid://buymcdjsnx3le" path="res://tscn/ground.tscn" id="4_tp0hw"]
 [ext_resource type="AudioStream" uid="uid://b1wp8gsoky1v4" path="res://sounds/scored.ogg" id="6_rpnrw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
-size = Vector2(73.25, 9.5)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_740th"]
-a = Vector2(23, 13)
-b = Vector2(-22, 13)
+[ext_resource type="AudioStream" uid="uid://cjmhl3ddx8tgv" path="res://sounds/Fly-Away-When-The-Fog-Settled-Down(chosic.com).ogg" id="7_qol31"]
+[ext_resource type="PackedScene" uid="uid://doeybixtb2jxa" path="res://tscn/endscreen.tscn" id="8_ahfkb"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_740th")
@@ -20,29 +15,12 @@ script = ExtResource("1_740th")
 [node name="startscreen" parent="." instance=ExtResource("2_740th")]
 z_index = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(575.9998, 393.5)
+scale = Vector2(0.17999996, 0.21861114)
+texture = ExtResource("3_qol31")
 
-[node name="catchingnet" type="CharacterBody2D" parent="."]
-script = ExtResource("1_ivtoj")
-
-[node name="Sprite2D" type="Sprite2D" parent="catchingnet"]
-position = Vector2(575, 269.5)
-scale = Vector2(2.9375, 2.46875)
-texture = ExtResource("1_juix7")
-
-[node name="Area2D" type="Area2D" parent="catchingnet"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet/Area2D"]
-position = Vector2(573.375, 263)
-shape = SubResource("RectangleShape2D_80nbo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="catchingnet"]
-position = Vector2(573.375, 263)
-shape = SubResource("RectangleShape2D_80nbo")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="catchingnet"]
-position = Vector2(573, 286)
-shape = SubResource("SegmentShape2D_740th")
+[node name="catchingnet" parent="." instance=ExtResource("4_qol31")]
 
 [node name="overlay" type="CanvasLayer" parent="."]
 
@@ -52,8 +30,27 @@ offset_top = 7.0
 offset_right = 73.0
 offset_bottom = 30.0
 
+[node name="time_left" type="Label" parent="overlay"]
+offset_left = 6.0
+offset_top = 67.0
+offset_right = 111.0
+offset_bottom = 91.0
+text = "Time Left"
+
+[node name="target" type="Label" parent="overlay"]
+offset_left = 1044.0
+offset_top = 15.0
+offset_right = 1142.0
+offset_bottom = 44.0
+text = "Target"
+
 [node name="ground" parent="." instance=ExtResource("4_tp0hw")]
 disable_mode = 2
 
 [node name="scored" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_rpnrw")
+
+[node name="bg" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_qol31")
+
+[node name="endscreen" parent="." instance=ExtResource("8_ahfkb")]

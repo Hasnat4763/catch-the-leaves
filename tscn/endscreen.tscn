@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://doeybixtb2jxa"]
+
+[ext_resource type="Script" uid="uid://dseflce3rqf5w" path="res://scripts/endscreen.gd" id="1_sug1e"]
+
+[node name="endscreen" type="CanvasLayer"]
+script = ExtResource("1_sug1e")
+
+[node name="end_message" type="Label" parent="."]
+offset_left = 293.0
+offset_right = 930.0
+offset_bottom = 190.0
+
+[node name="restart" type="Button" parent="."]
+offset_left = 425.0
+offset_top = 232.0
+offset_right = 768.0
+offset_bottom = 368.0
+theme_override_colors/font_color = Color(0.7780198, 0, 0.22074693, 1)
+theme_override_colors/font_focus_color = Color(0.9312202, 1, 0.4895196, 1)
+theme_override_colors/font_hover_color = Color(0.9999997, 0.98227113, 0.3049806, 1)
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]

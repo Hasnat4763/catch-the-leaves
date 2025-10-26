@@ -1,16 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm1ojyciwpr5s"]
+[gd_scene load_steps=6 format=3 uid="uid://bm1ojyciwpr5s"]
 
 [ext_resource type="Script" uid="uid://la2j731f8iok" path="res://scripts/start.gd" id="1_31g0q"]
+[ext_resource type="Texture2D" uid="uid://dfy77ms880m65" path="res://sprites/background.png" id="1_400f0"]
+
+[sub_resource type="FontVariation" id="FontVariation_31g0q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_400f0"]
+line_spacing = 4.0
+paragraph_spacing = 2.0
+font = SubResource("FontVariation_31g0q")
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+outline_size = 4
+outline_color = Color(0.15386021, 0.066921435, 0.006096337, 1)
+shadow_color = Color(0.74817085, 0.37080562, 0.008581906, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_31g0q"]
 
 [node name="startscreen" type="Node2D"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_400f0")
+
 [node name="topbanner" type="Label" parent="."]
+offset_top = 81.0
 offset_right = 1150.0
-offset_bottom = 144.0
+offset_bottom = 225.0
 theme_override_font_sizes/font_size = 64
 text = "Catch The Leaf"
+label_settings = SubResource("LabelSettings_400f0")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
@@ -20,6 +42,10 @@ offset_left = 420.0
 offset_top = 227.0
 offset_right = 742.0
 offset_bottom = 309.0
+theme_override_colors/font_color = Color(0.44812036, 0.99999994, 0.718412, 1)
+theme_override_colors/font_focus_color = Color(0.4313626, 0.9999998, 0.5126826, 1)
+theme_override_colors/font_pressed_color = Color(0.5775385, 0.32670972, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_31g0q")
 theme_override_font_sizes/font_size = 32
 text = "Start"
 script = ExtResource("1_31g0q")
