@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://gct20msn75tr" path="res://tscn/catchingnet.tscn" id="4_qol31"]
 [ext_resource type="PackedScene" uid="uid://buymcdjsnx3le" path="res://tscn/ground.tscn" id="4_tp0hw"]
 [ext_resource type="AudioStream" uid="uid://b1wp8gsoky1v4" path="res://sounds/scored.ogg" id="6_rpnrw"]
-[ext_resource type="AudioStream" uid="uid://cjmhl3ddx8tgv" path="res://sounds/Fly-Away-When-The-Fog-Settled-Down(chosic.com).ogg" id="7_qol31"]
+[ext_resource type="AudioStream" uid="uid://cajwecvbfos6m" path="res://sounds/HoliznaCC0 - Autumn.mp3" id="8_1dydg"]
 [ext_resource type="PackedScene" uid="uid://doeybixtb2jxa" path="res://tscn/endscreen.tscn" id="8_ahfkb"]
 
 [node name="game" type="Node2D"]
@@ -64,7 +64,7 @@ disable_mode = 2
 stream = ExtResource("6_rpnrw")
 
 [node name="bg" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_qol31")
+stream = ExtResource("8_1dydg")
 
 [node name="endscreen" parent="." instance=ExtResource("8_ahfkb")]
 

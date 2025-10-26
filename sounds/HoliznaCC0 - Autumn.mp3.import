@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cajwecvbfos6m"
+path="res://.godot/imported/HoliznaCC0 - Autumn.mp3-5a5058474f79578bdea54bd4dea0056c.mp3str"
+
+[deps]
+
+source_file="res://sounds/HoliznaCC0 - Autumn.mp3"
+dest_files=["res://.godot/imported/HoliznaCC0 - Autumn.mp3-5a5058474f79578bdea54bd4dea0056c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
