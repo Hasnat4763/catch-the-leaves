@@ -7,6 +7,7 @@ var high_score: int
 var timer: float = 0
 var acorn_timer: float = 0
 var leaf_speed = 150
+var acorn_speed = 200
 @export var leaf_scene: PackedScene = preload("res://tscn/leafs.tscn")
 @export var acorn_scene: PackedScene = preload("res://tscn/acorn.tscn")
 @export var spawning_interval: float = 2.5
@@ -55,7 +56,6 @@ func stop_game():
 	else:
 		$endscreen/end_message.text = "You lost 😭 \n Better Luck Next Time"
 	$endscreen.show()
-	$endscreen/end_message.text = "Game Over"
 
 
 func _input(event: InputEvent):
@@ -82,8 +82,9 @@ func _process(delta: float):
 			time_left -= delta
 			$overlay/time_left.text = "Time Left: " + str(time_left)
 		else:
-			stop_game()
+			
 			game_won = false
+			stop_game()
 		
 		if score_target <= score:
 			game_won = true
@@ -103,7 +104,9 @@ func on_caught():
 func on_acorn_caught():
 	if $catchingnet.SPEED < 700:
 		$catchingnet.SPEED += 100
-		print($catchingnet.SPEED)
+		acorn_speed += 25
+		acorn_spawning_interval -= 0.5
+		
 	$scored.play()
 	score+=5
 	$overlay/score.text = "Score: " + str(score)
@@ -121,6 +124,7 @@ func spawn_leaves():
 
 func spawn_acorns():
 	var acorn = acorn_scene.instantiate()
+	acorn.set("fall_speed", leaf_speed)
 	var screen_width = get_viewport_rect().size.x
 	acorn.position.x = randi_range(0, int(screen_width)) - int(global_position.x)
 	acorn.position.y = -1

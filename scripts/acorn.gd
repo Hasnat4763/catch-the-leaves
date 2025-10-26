@@ -1,7 +1,7 @@
 extends Area2D
 signal acorn
 
-@export var fall_speed : float = 150
+@export var fall_speed : float = 200
 
 func _process(delta: float) -> void:
 	position.y += fall_speed * delta
