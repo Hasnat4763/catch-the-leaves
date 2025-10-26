@@ -9,6 +9,11 @@ var acorn_timer: float = 0
 var stick_timer: float = 0
 var leaf_speed = 150
 var acorn_speed = 200
+var time_left: float
+var game_won: bool
+var custom_game: bool = false
+var stick_collected: int = 0
+const save_path = "user://score_save.save"
 @export var leaf_scene: PackedScene = preload("res://tscn/leafs.tscn")
 @export var acorn_scene: PackedScene = preload("res://tscn/acorn.tscn")
 @export var stick_scene: PackedScene = preload("res://tscn/stick.tscn")
@@ -17,22 +22,28 @@ var acorn_speed = 200
 @export var stick_spawning_interval: float = 2
 @export var score_target: int
 @export var time_limit: float
-var time_left: float
-var game_won: bool
-
 
 func _ready() -> void:
 	randomize()
-	new_game()
-	$startscreen/start.start_sigma.connect(start_game)
+	if not DisplayServer.is_touchscreen_available():
+		print("No TouchScreen")
+		$touch_control.hide()
+	$startscreen.start_sigma.connect(start_game)
 	$endscreen.restart.connect(new_game)
+	$startscreen.start_custom.connect(start_custom)
+	$endscreen.hide()
+	$overlay.hide()
+	$catchingnet.hide()
+	$startscreen.show()
+	load_score()
 
 func new_game():
 	game_running = false
 	game_over = false
-	score_target = randi_range(10, 60)
-	time_limit = randf_range(30, 240)
-	time_left = time_limit
+	if not custom_game:
+		score_target = randi_range(10, 60)
+		time_limit = randf_range(30, 240)
+		time_left = time_limit
 	$endscreen.hide()
 	$overlay/score.text = "Score: 0"
 	$overlay/time_left.text = "Time Left: " + str(time_left)
@@ -41,7 +52,6 @@ func new_game():
 	$catchingnet.hide()
 	$startscreen.show()
 
-
 func start_game():
 	game_running = true
 	game_over = false
@@ -49,7 +59,27 @@ func start_game():
 	$catchingnet.show()
 	$overlay.show()
 	$startscreen.hide()
-	
+
+func start_custom(time_limit_custom: float, target_custom: int, fall_speed_custom: float, movement_speed_custom: float):
+	leaf_speed += fall_speed_custom * 10
+	acorn_speed += fall_speed_custom * 10
+	$catchingnet.SPEED += movement_speed_custom * 10
+	score_target = target_custom
+	time_limit = time_limit_custom
+	time_left = time_limit
+	stick_collected = 0
+	score = 0
+	custom_game = true
+	$overlay/score.text = "Score: 0"
+	$overlay/time_left.text = "Time Left: " + str(int(time_left)) + " seconds"
+	$overlay/target.text = "Target: " + str(score_target)
+	$startscreen.hide()
+	$overlay.show()
+	$catchingnet.show()
+	$bg.play()
+	game_running = true
+	game_over = false
+
 func stop_game():
 	game_running = false
 	game_over = true
@@ -59,15 +89,16 @@ func stop_game():
 	else:
 		$endscreen/end_message.text = "You lost 😭 \n Better Luck Next Time"
 	$endscreen.show()
+	if score > high_score:
+		high_score = score
+		$endscreen/score.text = "Your Score Was " + str(score) + "\n" + "High Score Was " + str(high_score)
+		save()
 
 
 func _input(event: InputEvent):
 	if not game_running:
 		if event.is_action_pressed("ui_accept"):
 			start_game()
-	if game_running:
-		if event.is_action_pressed("ui_cancel"):
-			get_tree().quit()
 
 
 func _process(delta: float):
@@ -84,22 +115,19 @@ func _process(delta: float):
 		if stick_timer >= stick_spawning_interval:
 			stick_timer = 0
 			spawn_sticks()
-		
 		if time_left > 0:
 			time_left -= delta
-			$overlay/time_left.text = "Time Left: " + str(time_left)
+			$overlay/time_left.text = "Time Left: " + str(int(time_left)) + " seconds"
 		else:
-			
 			game_won = false
 			stop_game()
-		
 		if score_target <= score:
 			game_won = true
 			stop_game()
-			
-			
+		if stick_collected > 5:
+			game_won = false
+			stop_game()
 	$catchingnet.game_running = game_running
-		
 func on_caught():
 	score += 1
 	$overlay/score.text = "Score: " + str(score)
@@ -121,12 +149,12 @@ func on_acorn_caught():
 func on_stick_caught():
 	if score > 0:
 		score -= 1
+	stick_collected += 1
 	$overlay/score.text = "Score: " + str(score)
 	$stick_collected.play()
 	
 func spawn_leaves():
 	var leaf = leaf_scene.instantiate()
-
 	leaf.set("game_running", true)
 	leaf.set("fall_speed", leaf_speed)
 	var screen_width = get_viewport_rect().size.x
@@ -151,3 +179,12 @@ func spawn_sticks():
 	stick.position.y = -1
 	stick.stick.connect(on_stick_caught)
 	add_child(stick)
+
+func save():
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	file.store_var(high_score)
+	
+func load_score():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		high_score = file.get_var()

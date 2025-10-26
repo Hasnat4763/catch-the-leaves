@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://n2ioo7ej3xac"]
+
+[node name="touch_control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="up" type="TouchScreenButton" parent="."]
+position = Vector2(1075, 499)
+action = "ui_up"
+
+[node name="down" type="TouchScreenButton" parent="."]
+position = Vector2(1076, 559)
+action = "ui_down"
+
+[node name="left" type="TouchScreenButton" parent="."]
+position = Vector2(70, 533)
+action = "ui_left"
+
+[node name="right" type="TouchScreenButton" parent="."]
+position = Vector2(154, 532)
+action = "ui_right"

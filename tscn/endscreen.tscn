@@ -15,11 +15,20 @@ text = "HIHIHI"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="score" type="Label" parent="."]
+offset_left = 551.0
+offset_top = 235.0
+offset_right = 678.0
+offset_bottom = 306.0
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="restart" type="Button" parent="."]
-offset_left = 425.0
-offset_top = 232.0
-offset_right = 768.0
-offset_bottom = 368.0
+offset_left = 449.0
+offset_top = 406.0
+offset_right = 792.0
+offset_bottom = 542.0
 theme_override_colors/font_color = Color(0.7780198, 0, 0.22074693, 1)
 theme_override_colors/font_focus_color = Color(0.9312202, 1, 0.4895196, 1)
 theme_override_colors/font_hover_color = Color(0.9999997, 0.98227113, 0.3049806, 1)

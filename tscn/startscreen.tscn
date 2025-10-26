@@ -16,8 +16,10 @@ outline_color = Color(0.15386021, 0.066921435, 0.006096337, 1)
 shadow_color = Color(0.74817085, 0.37080562, 0.008581906, 0)
 
 [sub_resource type="SystemFont" id="SystemFont_31g0q"]
+subpixel_positioning = 0
 
 [node name="startscreen" type="Node2D"]
+script = ExtResource("1_31g0q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(576, 324)
@@ -48,7 +50,62 @@ theme_override_colors/font_pressed_color = Color(0.5775385, 0.32670972, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_31g0q")
 theme_override_font_sizes/font_size = 32
 text = "Start"
-script = ExtResource("1_31g0q")
 metadata/_edit_use_anchors_ = true
 
-[connection signal="pressed" from="start" to="start" method="_on_pressed"]
+[node name="Custom_game" type="VBoxContainer" parent="."]
+offset_left = 370.0
+offset_top = 387.0
+offset_right = 789.0
+offset_bottom = 604.0
+
+[node name="start_custom" type="Button" parent="Custom_game"]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.44812036, 0.99999994, 0.718412, 1)
+theme_override_colors/font_focus_color = Color(0.4313626, 0.9999998, 0.5126826, 1)
+theme_override_colors/font_pressed_color = Color(0.5775385, 0.32670972, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_31g0q")
+theme_override_font_sizes/font_size = 32
+text = "Start With Custom Values"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Custom_game"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Falling Speed"
+horizontal_alignment = 1
+
+[node name="falling_speed" type="HSlider" parent="Custom_game"]
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+step = 0.25
+value = 1.0
+ticks_position = 3
+
+[node name="Label2" type="Label" parent="Custom_game"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Movement Speed"
+horizontal_alignment = 1
+
+[node name="movement_speed" type="HSlider" parent="Custom_game"]
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+step = 0.25
+value = 1.0
+ticks_position = 3
+
+[node name="time_limit" type="LineEdit" parent="Custom_game"]
+layout_mode = 2
+placeholder_text = "Time Limit (Normally 30)"
+alignment = 1
+
+[node name="target" type="LineEdit" parent="Custom_game"]
+layout_mode = 2
+placeholder_text = "Target (Normally 10)"
+alignment = 1
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Custom_game/start_custom" to="." method="_on_start_custom_pressed"]
