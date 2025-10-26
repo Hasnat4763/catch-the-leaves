@@ -54,3 +54,7 @@ stream = ExtResource("6_rpnrw")
 stream = ExtResource("7_qol31")
 
 [node name="endscreen" parent="." instance=ExtResource("8_ahfkb")]
+
+[node name="stick_collected" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_rpnrw")
+pitch_scale = 16.25

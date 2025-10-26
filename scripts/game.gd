@@ -6,12 +6,15 @@ var leaves: Array = []
 var high_score: int
 var timer: float = 0
 var acorn_timer: float = 0
+var stick_timer: float = 0
 var leaf_speed = 150
 var acorn_speed = 200
 @export var leaf_scene: PackedScene = preload("res://tscn/leafs.tscn")
 @export var acorn_scene: PackedScene = preload("res://tscn/acorn.tscn")
+@export var stick_scene: PackedScene = preload("res://tscn/stick.tscn")
 @export var spawning_interval: float = 2.5
 @export var acorn_spawning_interval: float = 9.5
+@export var stick_spawning_interval: float = 2
 @export var score_target: int
 @export var time_limit: float
 var time_left: float
@@ -71,13 +74,17 @@ func _process(delta: float):
 	if game_running:
 		acorn_timer += delta
 		timer+=delta
+		stick_timer += delta
 		if timer >= spawning_interval:
 			timer = 0
 			spawn_leaves()
 		if acorn_timer >= acorn_spawning_interval:
 			acorn_timer = 0
 			spawn_acorns()
-			
+		if stick_timer >= stick_spawning_interval:
+			stick_timer = 0
+			spawn_sticks()
+		
 		if time_left > 0:
 			time_left -= delta
 			$overlay/time_left.text = "Time Left: " + str(time_left)
@@ -111,6 +118,12 @@ func on_acorn_caught():
 	score+=5
 	$overlay/score.text = "Score: " + str(score)
 	
+func on_stick_caught():
+	if score > 0:
+		score -= 1
+	$overlay/score.text = "Score: " + str(score)
+	$stick_collected.play()
+	
 func spawn_leaves():
 	var leaf = leaf_scene.instantiate()
 
@@ -130,3 +143,11 @@ func spawn_acorns():
 	acorn.position.y = -1
 	acorn.acorn.connect(on_acorn_caught)
 	add_child(acorn)
+
+func spawn_sticks():
+	var stick = stick_scene.instantiate()
+	var screen_width = get_viewport_rect().size.x
+	stick.position.x = randi_range(0, int(screen_width)) - int(global_position.x)
+	stick.position.y = -1
+	stick.stick.connect(on_stick_caught)
+	add_child(stick)

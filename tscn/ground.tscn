@@ -1,11 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://buymcdjsnx3le"]
+[gd_scene load_steps=6 format=3 uid="uid://buymcdjsnx3le"]
 
 [ext_resource type="Script" uid="uid://26yn7hn7suoj" path="res://scripts/ground.gd" id="1_10x1x"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_10x1x"]
+b = Vector2(0, 648)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_knm4c"]
+a = Vector2(1153, 1)
+b = Vector2(0, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_00hgb"]
+a = Vector2(1142, 651)
+b = Vector2(-10, 651)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l14lv"]
+a = Vector2(205, -505)
+b = Vector2(206, 136)
 
 [node name="ground" type="StaticBody2D"]
 script = ExtResource("1_10x1x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="ground" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 0, 648, 1152, 649, 1152, 0, 1170, 670, -8, 655)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_10x1x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("SegmentShape2D_knm4c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(10, -3)
+shape = SubResource("SegmentShape2D_00hgb")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(947, 505)
+shape = SubResource("SegmentShape2D_l14lv")
