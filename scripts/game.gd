@@ -51,9 +51,7 @@ func _ready() -> void:
 func new_game():
 	game_running = false
 	game_over = false
-	score_target = randi_range(10, 60)
-	time_limit = randf_range(30, 240)
-	time_left = time_limit
+	
 	score = 0
 	stick_collected = 0
 	custom_game = false
@@ -76,25 +74,31 @@ func new_game():
 func start_game():
 	score = 0
 	stick_collected = 0
-	time_left = time_limit
 	game_won = false
 	game_running = true
 	game_over = false
+	score_target = randi_range(10, 60)
+	time_limit = randf_range(30, 240)
+	time_left = time_limit
 	leaf_speed = base_leaf_speed
 	acorn_speed = base_acorn_speed
 	$catchingnet.SPEED = base_net_speed
 	spawning_interval = 2.5
 	acorn_spawning_interval = 9.5
+	$overlay/score.text = "Score: 0"
+	$overlay/time_left.text = "Time Left: " + str(int(time_left)) + " seconds"
+	$overlay/target.text = "Target: " + str(score_target)
+	$overlay/sticks.text = "Sticks: 0/5"
 	$bg.play()
 	$catchingnet.show()
 	$overlay.show()
-	$overlay/sticks.text = "Sticks: 0/5"
 	$startscreen.hide()
 
+
 func start_custom(time_limit_custom: float, target_custom: int, fall_speed_custom: float, movement_speed_custom: float):
-	leaf_speed = base_leaf_speed + fall_speed_custom * 10
-	acorn_speed = base_acorn_speed + fall_speed_custom * 10
-	$catchingnet.SPEED = base_net_speed + movement_speed_custom * 10
+	leaf_speed = base_leaf_speed + fall_speed_custom * 50
+	acorn_speed = base_acorn_speed + fall_speed_custom * 50
+	$catchingnet.SPEED = base_net_speed + movement_speed_custom * 100
 	score_target = target_custom
 	time_limit = time_limit_custom
 	time_left = time_limit
@@ -119,7 +123,7 @@ func stop_game():
 	if game_won:
 		$endscreen/end_message.text = "You Won!!!!"
 	else:
-		$endscreen/end_message.text = "You lost 😭 \n Better Luck Next Time"
+		$endscreen/end_message.text = "You lost \n Better Luck Next Time"
 	$endscreen.show()
 	if score > high_score:
 		high_score = score
@@ -134,6 +138,8 @@ func _input(event: InputEvent):
 
 
 func _process(delta: float):
+	if game_over:
+		return
 	if game_running:
 		acorn_timer += delta
 		timer += delta
@@ -192,7 +198,7 @@ func spawn_leaves():
 	leaf.set("game_running", true)
 	leaf.set("fall_speed", leaf_speed)
 	var screen_width = get_viewport_rect().size.x
-	leaf.position.x = randi_range(0, int(screen_width)) - int(global_position.x)
+	leaf.position.x = randi_range(0, int(screen_width))
 	leaf.position.y = -1
 	leaf.caught.connect(on_caught)
 	add_child(leaf)
@@ -201,7 +207,7 @@ func spawn_acorns():
 	var acorn = acorn_scene.instantiate()
 	acorn.set("fall_speed", acorn_speed)
 	var screen_width = get_viewport_rect().size.x
-	acorn.position.x = randi_range(0, int(screen_width)) - int(global_position.x)
+	acorn.position.x = randi_range(0, int(screen_width))
 	acorn.position.y = -1
 	acorn.acorn.connect(on_acorn_caught)
 	add_child(acorn)
@@ -209,7 +215,7 @@ func spawn_acorns():
 func spawn_sticks():
 	var stick = stick_scene.instantiate()
 	var screen_width = get_viewport_rect().size.x
-	stick.position.x = randi_range(0, int(screen_width)) - int(global_position.x)
+	stick.position.x = randi_range(0, int(screen_width))
 	stick.position.y = -1
 	stick.stick.connect(on_stick_caught)
 	add_child(stick)

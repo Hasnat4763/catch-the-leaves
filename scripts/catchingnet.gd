@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var SPEED = 300.0
+@export var SPEED = 300.0
 var game_running = false
 func _physics_process(_delta: float):
 	var direction_horiz := Input.get_axis("ui_left", "ui_right")
