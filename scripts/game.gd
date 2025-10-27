@@ -36,7 +36,6 @@ func _ready() -> void:
 	time_left = time_limit
 	base_net_speed = $catchingnet.SPEED
 	if not DisplayServer.is_touchscreen_available():
-		print("No TouchScreen")
 		$touch_control.hide()
 	$startscreen.start_sigma.connect(start_game)
 	$endscreen.restart.connect(new_game)
@@ -51,7 +50,6 @@ func _ready() -> void:
 func new_game():
 	game_running = false
 	game_over = false
-	
 	score = 0
 	stick_collected = 0
 	custom_game = false
