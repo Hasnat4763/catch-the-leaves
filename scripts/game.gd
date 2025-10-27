@@ -16,6 +16,7 @@ var stick_collected: int = 0
 var base_leaf_speed = 150
 var base_acorn_speed = 200
 var base_net_speed = 0
+var screen_width = get_tree().root.get_visible_rect().size.x
 const save_path = "user://score_save.save"
 const MAX_LEAF_SPEED = 400
 const MAX_ACORN_SPEED = 500
@@ -195,7 +196,6 @@ func spawn_leaves():
 	var leaf = leaf_scene.instantiate()
 	leaf.set("game_running", true)
 	leaf.set("fall_speed", leaf_speed)
-	var screen_width = get_viewport_rect().size.x
 	leaf.position.x = randi_range(0, int(screen_width))
 	leaf.position.y = -1
 	leaf.caught.connect(on_caught)
@@ -204,7 +204,6 @@ func spawn_leaves():
 func spawn_acorns():
 	var acorn = acorn_scene.instantiate()
 	acorn.set("fall_speed", acorn_speed)
-	var screen_width = get_viewport_rect().size.x
 	acorn.position.x = randi_range(0, int(screen_width))
 	acorn.position.y = -1
 	acorn.acorn.connect(on_acorn_caught)
@@ -212,7 +211,6 @@ func spawn_acorns():
 
 func spawn_sticks():
 	var stick = stick_scene.instantiate()
-	var screen_width = get_viewport_rect().size.x
 	stick.position.x = randi_range(0, int(screen_width))
 	stick.position.y = -1
 	stick.stick.connect(on_stick_caught)
