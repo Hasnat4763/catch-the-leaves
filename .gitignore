@@ -16,3 +16,4 @@ data_*/
 mono_crash.*.json
 /GDQuest_GDScript_formatter
 /addons
+*.zip
